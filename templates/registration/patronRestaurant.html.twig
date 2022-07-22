@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Save My Store - Restaurant owner registration {% endblock %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{{ asset('scss/registration.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+      {{ form_start(patronRestaurantForm) }}
+
+  <div class="container mb-4 mt-4">
+    <div class="card">
+      <div class="card-body">
+
+          <div class="card-body">
+            <div class="cust-cont-center">
+              <h2 class="cust-form-title">Create your account in Save My Store</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                  {{ form_label(patronRestaurantForm.username)}}
+                  {{ form_widget(patronRestaurantForm.username, { 'attr': {'class': 'form-control'} })}}
+              </div>
+              <div class="form-group col-md-6">
+                {{ form_label(patronRestaurantForm.plainPassword)}}
+                  {{ form_widget(patronRestaurantForm.plainPassword, { 'attr': {'class': 'form-control'} })}}
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="cust-cont-center">
+              <h2 class="cust-form-title">Fill in your details</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                {{ form_label(patronRestaurantForm.nom)}}
+                  {{ form_widget(patronRestaurantForm.nom, { 'attr': {'class': 'form-control'} })}}
+              </div>
+
+              <div class="form-group col-md-3">
+                  {{ form_label(patronRestaurantForm.prenom)}}
+                  {{ form_widget(patronRestaurantForm.prenom, { 'attr': {'class': 'form-control'} })}}
+              </div>
+              <div class="form-group col-md-3">
+                  {{ form_label(patronRestaurantForm.tel)}}
+                  {{ form_widget(patronRestaurantForm.tel, { 'attr': {'class': 'form-control'} })}}
+              </div>
+              <div class="form-group col-md-3">
+                  {{ form_label(patronRestaurantForm.email)}}
+                  {{ form_widget(patronRestaurantForm.email, { 'attr': {'class': 'form-control'} })}}
+              </div>
+
+              <div class="form-group col-md-3">
+                {{ form_label(patronRestaurantForm.rue)}}
+                {{ form_widget(patronRestaurantForm.rue, { 'attr': {'class': 'form-control'} })}}
+              </div>
+              <div class="form-group col-md-3">
+                {{ form_label(patronRestaurantForm.immeuble)}}
+                {{ form_widget(patronRestaurantForm.immeuble, { 'attr': {'class': 'form-control'} })}}
+              </div>
+              <div class="form-group col-md-3">
+                {{ form_label(patronRestaurantForm.code_postal)}}
+                {{ form_widget(patronRestaurantForm.code_postal, { 'attr': {'class': 'form-control'} })}}
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="cust-cont-center">
+              <h2 class="cust-form-title">Find your restaurant</h2>
+            </div>
+            <div class="cust-cont-center">
+              <div class="cammis-choice-cont">
+                {{ form_label(patronRestaurantForm.Restaurant)}}
+                {{ form_widget(patronRestaurantForm.Restaurant)}}
+              </div>
+            </div>
+          </div>
+            <div class="d-flex justify-content-end">
+            {{ form_widget(patronRestaurantForm.submit)}}
+          </div>
+          {{ form_rest(patronRestaurantForm) }}
+
+      </div>
+    </div>
+  </div>
+    {{ form_end(patronRestaurantForm) }}
+
+{% endblock %}

@@ -1,0 +1,73 @@
+<div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body">
+    </div>
+</div>
+
+
+<header class="site-navbar" role="banner">
+
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  <div class="float-right user-logo">
+    <a class="far fa-user ftaw-user text-white" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      {% if app.user.patronrestaurant.id is defined %}
+          <li><a href="/profile/restaurant_owner/{{ app.user.patronrestaurant.id }}" class="nav-link dropdown-item">Profil</a></li>
+      {% endif %}
+      {% if app.user.patronprestataire.id is defined %}
+          <li><a href="/profile/service_owner/{{ app.user.patronprestataire.id }}" class="nav-link dropdown-item">Profil</a></li>
+      {% endif %}
+      {% if app.user.roles is defined %}
+          {% for role in app.user.roles %}
+              {% if role == 'ROLE_ADMIN' %}
+              <li><a href="{{ path('admin') }}" class="dropdown-item">Profil<a></li>
+              {% endif %}
+          {% endfor %}
+      {% endif %}
+      <li><a href="{{ path('app_logout') }}" class="dropdown-item w-color">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class="container banner-bg">
+      <div class="row d-flex align-items-center justify-content-around">
+          <div class="site-navbar-target col-3 text-center">
+                <nav class="site-navigation" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                        <li><a href="{{ path('services') }}" class="nav-link w-color">Our Services</a></li>
+                        <li><a href="{{ path('story') }}" class="nav-link w-color">Our Story</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-3 text-center">
+                <div class="site-logo">
+                    <a href="/"><img src="{{ asset('/images/LogoSMSdark2.png') }}" class="logo-img"></a>
+                </div>
+                <div class="ml-auto toggle-button d-inline-block d-lg-none">
+                  <a href="#"class="site-menu-toggle py-5 js-menu-toggle text-black">
+                    <span class="icon-menu h3 text-black"></span>
+                  </a>
+                </div>
+            </div>
+            <div class="col-3 text-center">
+                <nav class="site-navigation" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                          <li><a href="{{ path('map') }}" class=" w-color">Map</a></li>
+                          <li><a href="{{ path('contact') }}" class="w-color">Contact us</a></li>
+                        {% else %}
+                          <li><a href="{{ path('register') }}" class="w-color">Register</a></li>
+                          <li><a href="{{ path('app_login') }}" class="w-color">Sign in</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+          </div>
+      </div>
+  </div>
+</header>
